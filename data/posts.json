@@ -1,0 +1,44 @@
+[
+  {
+    "id": "welcome-to-my-field-notes",
+    "title": "The quiet work of becoming yourself",
+    "slug": "the-quiet-work-of-becoming-yourself",
+    "excerpt": "A note on paying attention, making things with care, and giving ourselves room to change.",
+    "body": "There is a version of growth that looks impressive from the outside: the new job, the finished project, the clear before-and-after. But most of becoming happens somewhere quieter.\n\n## Start by paying attention\n\nLately, I have been trying to notice the small things that pull me forward—the subjects I keep returning to, the work that makes an afternoon disappear, the conversations I am still thinking about days later. Those clues are easy to miss when everything is measured by output.\n\n> A life gets its shape from what we choose to notice.\n\nThis blog is a place for those clues. I will share what I am learning, what I am making, and the ideas that are changing how I see the world. It will not always be polished. That is part of the point.\n\n## An open notebook\n\nI want this space to feel less like a finished portfolio and more like a desk with the good pages left open. A record of curiosity in motion. Thanks for reading from the beginning.",
+    "category": "Reflection",
+    "readTime": 4,
+    "publishedAt": "2026-08-12",
+    "status": "published",
+    "featured": true,
+    "createdAt": "2026-08-12T09:00:00.000Z",
+    "updatedAt": "2026-08-12T09:00:00.000Z"
+  },
+  {
+    "id": "learning-in-public",
+    "title": "Why I am learning in public",
+    "slug": "why-i-am-learning-in-public",
+    "excerpt": "Sharing unfinished thoughts feels uncomfortable—and that might be exactly why it matters.",
+    "body": "I used to think I should only share an idea after I understood it completely. The result was predictable: I rarely shared anything.\n\nLearning in public changes the goal. Instead of proving expertise, I can document progress. A rough thought can start a useful conversation. A small discovery can save somebody else an hour.\n\n## What I hope to practice\n\n- Explain one thing simply\n- Show the process, not only the result\n- Stay open to being corrected\n- Return to old ideas with new perspective\n\nThe archive may become inconsistent. Good. That means I kept moving.",
+    "category": "Learning",
+    "readTime": 3,
+    "publishedAt": "2026-08-04",
+    "status": "published",
+    "featured": false,
+    "createdAt": "2026-08-04T09:00:00.000Z",
+    "updatedAt": "2026-08-04T09:00:00.000Z"
+  },
+  {
+    "id": "creative-routine",
+    "title": "A creative routine I can actually keep",
+    "slug": "a-creative-routine-i-can-actually-keep",
+    "excerpt": "No five-o'clock alarm. No perfect desk. Just a few small rules that make starting easier.",
+    "body": "The best routine is not the most ambitious one. It is the one that survives a busy Wednesday.\n\nMine is simple: leave a clear next step, protect one small block of time, and stop before I am completely empty. The first rule removes friction. The second makes the work real. The third gives me somewhere inviting to begin tomorrow.\n\nConsistency, I am learning, is mostly an act of kindness toward your future self.",
+    "category": "Process",
+    "readTime": 2,
+    "publishedAt": "2026-07-28",
+    "status": "published",
+    "featured": false,
+    "createdAt": "2026-07-28T09:00:00.000Z",
+    "updatedAt": "2026-07-28T09:00:00.000Z"
+  }
+]

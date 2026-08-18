@@ -1,0 +1,14 @@
+{
+  "name": "field-notes-personal-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A personal blog with a built-in writing studio and JSON API.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test --test-isolation=none"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing Studio — Field Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/studio.css?v=3">
+</head>
+<body>
+  <section class="login-screen" id="login-screen">
+    <div class="login-card">
+      <a class="studio-brand" href="/"><span>F</span> Field Notes</a>
+      <p class="kicker">Private writing space</p>
+      <h1>Welcome back<br>to your studio.</h1>
+      <p>Enter your studio key to write and manage your notes.</p>
+      <form id="login-form">
+        <label for="studio-key">Studio key</label>
+        <div class="password-row"><input id="studio-key" type="password" autocomplete="current-password" placeholder="Enter your key" required><button type="submit">Enter studio →</button></div>
+        <p class="form-error" id="login-error" role="alert"></p>
+      </form>
+      <small>First time here? The local starter key is <code>portfolio</code>.</small>
+    </div>
+  </section>
+
+  <div class="studio-shell" id="studio-shell" hidden>
+    <aside class="sidebar">
+      <a class="studio-brand" href="/"><span>F</span> Field Notes</a>
+      <button class="new-post-button" id="new-post">＋ New note</button>
+      <div class="sidebar-label"><span>Your notes</span><b id="post-count">0</b></div>
+      <div class="post-list" id="post-list"></div>
+      <div class="sidebar-bottom"><a href="/" target="_blank">View public site ↗</a><button id="lock-studio">Lock studio</button></div>
+    </aside>
+
+    <main class="workspace">
+      <header class="workspace-header">
+        <div><p id="editor-mode">New note</p><span id="save-state">All changes saved locally</span></div>
+        <div class="header-actions"><button class="delete-button" id="delete-post" hidden>Delete</button><button class="preview-button" id="toggle-preview">Preview</button><button class="save-button" id="save-post">Publish note</button></div>
+      </header>
+
+      <div class="editor-layout">
+        <form class="editor" id="post-form">
+          <input type="hidden" id="post-id">
+          <div class="meta-row">
+            <label>Publish date<input id="published-at" type="date" required></label>
+            <label>Read time<input id="read-time" type="number" min="1" max="60" value="3"><span class="suffix">min</span></label>
+          </div>
+          <input class="title-input" id="title" maxlength="120" placeholder="Give this note a title…" required>
+          <textarea class="excerpt-input" id="excerpt" maxlength="220" rows="2" placeholder="A short introduction for the homepage…"></textarea>
+          <div class="body-label"><span>Story</span><span>Markdown supported</span></div>
+          <textarea class="body-input" id="body" placeholder="Start writing here…&#10;&#10;Use ## for headings, > for quotes, and - for lists." required></textarea>
+          <div class="publishing-options">
+            <label><input id="is-draft" type="checkbox"><span class="check"></span><span><b>Keep as draft</b><small>Save it in the studio without making it public.</small></span></label>
+          </div>
+          <p class="form-error" id="editor-error" role="alert"></p>
+        </form>
+        <aside class="preview-pane" id="preview-pane" hidden><p class="preview-label">Live preview</p><article id="preview-content"></article></aside>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/shared.js?v=3"></script>
+  <script src="/studio.js?v=3"></script>
+</body>
+</html>
