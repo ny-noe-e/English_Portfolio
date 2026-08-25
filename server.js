@@ -192,7 +192,11 @@ async function handleApi(req, res, url) {
 }
 
 async function serveStatic(res, pathname) {
-  const route = pathname === '/studio' ? '/studio.html' : pathname.startsWith('/posts/') ? '/index.html' : pathname;
+  const route = pathname === '/studio'
+    ? '/studio.html'
+    : pathname === '/about'
+      ? '/about.html'
+      : pathname.startsWith('/posts/') ? '/index.html' : pathname;
   const relative = route === '/' ? 'index.html' : route.replace(/^\/+/, '');
   const filePath = path.resolve(PUBLIC_DIR, relative);
   if (!filePath.startsWith(PUBLIC_DIR)) return send(res, 403, 'Forbidden', 'text/plain; charset=utf-8');

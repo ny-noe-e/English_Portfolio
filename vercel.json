@@ -13,6 +13,7 @@
   },
   "rewrites": [
     { "source": "/studio", "destination": "/studio.html" },
+    { "source": "/about", "destination": "/about.html" },
     { "source": "/posts/:slug", "destination": "/index.html" }
   ]
 }
