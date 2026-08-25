@@ -6,6 +6,9 @@
   "functions": {
     "api/[...path].js": {
       "includeFiles": "data/posts.json"
+    },
+    "api/posts/[id].js": {
+      "includeFiles": "data/posts.json"
     }
   },
   "rewrites": [
