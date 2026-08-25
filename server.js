@@ -75,10 +75,16 @@ async function readLocalPosts() {
 async function readPosts() {
   if (!blobStorageAvailable()) return readLocalPosts();
 
-  const { get } = await import('@vercel/blob');
-  const result = await get(BLOB_PATH, { access: 'private', useCache: false });
-  if (!result || result.statusCode !== 200 || !result.stream) return readLocalPosts();
-  return JSON.parse(await new Response(result.stream).text());
+  try {
+    const { get } = await import('@vercel/blob');
+    const result = await get(BLOB_PATH, { access: 'private', useCache: false });
+    if (!result || result.statusCode !== 200 || !result.stream) return readLocalPosts();
+    return JSON.parse(await new Response(result.stream).text());
+  } catch (error) {
+    if (process.env.BLOB_READ_WRITE_TOKEN) throw error;
+    console.warn('Vercel Blob is not connected; using bundled starter posts.');
+    return readLocalPosts();
+  }
 }
 
 async function writePosts(posts) {
