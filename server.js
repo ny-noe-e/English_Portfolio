@@ -61,7 +61,9 @@ function validatePost(input, existing = {}) {
 }
 
 function blobStorageAvailable() {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL_OIDC_TOKEN);
+  // Private Blob uses request-scoped OIDC authentication in Vercel Functions,
+  // so VERCEL_OIDC_TOKEN is not exposed as a normal runtime environment value.
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL);
 }
 
 async function readLocalPosts() {
