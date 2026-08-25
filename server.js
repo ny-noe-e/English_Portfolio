@@ -4,10 +4,11 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 
 const PORT = Number(process.env.PORT) || 3000;
-const ADMIN_KEY = process.env.ADMIN_KEY || 'portfolio';
+const ADMIN_KEY = process.env.ADMIN_KEY || (process.env.VERCEL ? '' : 'portfolio');
 const ROOT = __dirname;
 const PUBLIC_DIR = path.join(ROOT, 'public');
 const DATA_FILE = path.join(ROOT, 'data', 'posts.json');
+const BLOB_PATH = 'field-notes/posts.json';
 const MAX_BODY = 1_000_000;
 
 const mimeTypes = {
@@ -59,7 +60,11 @@ function validatePost(input, existing = {}) {
   };
 }
 
-async function readPosts() {
+function blobStorageAvailable() {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL_OIDC_TOKEN);
+}
+
+async function readLocalPosts() {
   try { return JSON.parse(await fs.readFile(DATA_FILE, 'utf8')); }
   catch (error) {
     if (error.code === 'ENOENT') return [];
@@ -67,7 +72,31 @@ async function readPosts() {
   }
 }
 
+async function readPosts() {
+  if (!blobStorageAvailable()) return readLocalPosts();
+
+  const { get } = await import('@vercel/blob');
+  const result = await get(BLOB_PATH, { access: 'private', useCache: false });
+  if (!result || result.statusCode !== 200 || !result.stream) return readLocalPosts();
+  return JSON.parse(await new Response(result.stream).text());
+}
+
 async function writePosts(posts) {
+  if (blobStorageAvailable()) {
+    const { put } = await import('@vercel/blob');
+    await put(BLOB_PATH, JSON.stringify(posts, null, 2), {
+      access: 'private',
+      allowOverwrite: true,
+      contentType: 'application/json',
+      cacheControlMaxAge: 60
+    });
+    return;
+  }
+
+  if (process.env.VERCEL) {
+    throw new Error('Post storage is not configured. Connect a private Vercel Blob store to this project.');
+  }
+
   const temp = `${DATA_FILE}.tmp`;
   await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
   await fs.writeFile(temp, JSON.stringify(posts, null, 2));
@@ -168,7 +197,7 @@ async function serveStatic(res, pathname) {
   }
 }
 
-const server = http.createServer(async (req, res) => {
+const requestHandler = async (req, res) => {
   try {
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
     if (url.pathname.startsWith('/api/')) await handleApi(req, res, url);
@@ -177,7 +206,9 @@ const server = http.createServer(async (req, res) => {
     console.error(error);
     send(res, error.message?.includes('must be') || error.message?.includes('Invalid') ? 400 : 500, { error: error.message || 'Something went wrong.' });
   }
-});
+};
+
+const server = http.createServer(requestHandler);
 
 if (require.main === module) {
   server.listen(PORT, () => {
@@ -186,4 +217,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { server, validatePost, slugify };
+module.exports = { server, requestHandler, validatePost, slugify };

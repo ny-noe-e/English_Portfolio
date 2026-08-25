@@ -1,6 +1,6 @@
 # Field Notes
 
-A full-stack personal blog with a public reading experience and a private writing studio. It uses only Node.js built-ins and stores posts in `data/posts.json`, so there is no database or dependency installation required.
+A full-stack personal blog with a public reading experience and a private writing studio. Local development stores posts in `data/posts.json`; Vercel deployments use a private Blob store for durable serverless storage.
 
 ## Run locally
 
@@ -18,6 +18,19 @@ npm.cmd start
 ```
 
 You can also change the port with the `PORT` environment variable.
+
+## Deploy to Vercel
+
+The project includes a Vercel Function for the JSON API and rewrites for the studio and post URLs.
+
+1. Import this repository in Vercel.
+2. In the project dashboard, open **Storage**, create a **Blob** store with **Private** access, and connect it to this project.
+3. In **Settings > Environment Variables**, add `ADMIN_KEY` with a long private value for Production, Preview, and Development.
+4. Deploy. Open `/studio` on the deployed URL and sign in with your `ADMIN_KEY` value.
+
+Until the first studio edit, the deployed site reads the starter posts from `data/posts.json`. The first create, update, or delete operation seeds the private Blob store with the resulting post list. Production reads bypass the Blob CDN cache so studio changes appear immediately.
+
+Vercel serves files in `public/` from its CDN and runs `api/[...path].js` as the backend. Local development continues to use `data/posts.json`.
 
 ## Features
 
