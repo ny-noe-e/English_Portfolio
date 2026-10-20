@@ -15,3 +15,16 @@
 .toast { position:fixed;right:28px;bottom:28px;padding:12px 18px;color:#fff;background:var(--forest);border-radius:3px;box-shadow:0 12px 35px rgba(0,0,0,.2);font-size:11px;opacity:0;transform:translateY(15px);pointer-events:none;transition:.25s; }.toast.show { opacity:1;transform:none; }
 @media(max-width:900px){.studio-shell{grid-template-columns:1fr}.sidebar{position:relative;height:auto;padding:18px;display:grid;grid-template-columns:1fr auto;gap:14px}.sidebar .studio-brand{border:0;padding:0}.new-post-button{margin:0}.sidebar-label,.post-list{grid-column:1/-1}.post-list{display:flex;overflow:auto}.post-list-item{min-width:190px}.sidebar-bottom{display:none}.workspace-header{padding:0 20px}.editor-layout.previewing{grid-template-columns:1fr}.preview-pane{border-left:0;border-top:1px solid var(--line)}.editor{padding:40px 25px}.meta-row{grid-template-columns:1fr 1fr}.meta-row label:first-child{grid-column:1/-1}}
 @media(max-width:560px){.login-card{padding:35px 24px}.login-card h1{font-size:44px}.password-row{flex-direction:column}.password-row button{padding:14px}.workspace-header>div:first-child{display:none}.workspace-header{justify-content:flex-end}.header-actions button{padding:8px 10px}.title-input{font-size:42px}.publishing-options{grid-template-columns:1fr}}
+
+.image-tools { margin:0 0 24px; border:1px solid var(--line); border-radius:4px; }
+.image-tools summary { padding:12px 14px; color:var(--orange); font-size:12px; cursor:pointer; }
+.image-fields { padding:0 14px 14px; display:grid; gap:9px; }
+.image-fields label { font-size:12px; }
+.image-fields input { width:100%; min-width:0; padding:10px; color:var(--ink); background:var(--paper); border:1px solid var(--line); border-radius:3px; }
+.image-fields input:focus { outline:2px solid var(--orange); outline-offset:2px; }
+.image-fields p { margin:0; color:var(--muted); font-size:12px; line-height:1.5; }
+.image-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.image-actions button { padding:10px 12px; color:var(--ink); background:var(--cream); border:1px solid var(--line); border-radius:3px; font-size:12px; }
+.image-actions button:last-child { color:var(--paper); background:var(--orange); }
+.preview-body .post-image { width:100%; max-width:520px; margin:28px auto; }
+.preview-body .post-image img { display:block; max-width:100%; height:auto; margin:auto; border-radius:8px; }

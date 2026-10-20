@@ -38,7 +38,7 @@ Vercel serves files in `public/` from its CDN and runs `api/[...path].js` as the
 - Automatic newest-first ordering and numbered entries
 - Separate password-protected writing studio
 - Create, edit, preview, publish, draft, feature, and delete posts
-- Lightweight Markdown support for headings, quotes, lists, links, emphasis, and inline code
+- Lightweight Markdown support for headings, quotes, lists, links, emphasis, inline code, and images
 - JSON API with atomic file writes and server-side validation
 
 ## API
@@ -49,3 +49,15 @@ Vercel serves files in `public/` from its CDN and runs `api/[...path].js` as the
 - `POST /api/posts` — create a post (requires `x-admin-key`)
 - `PUT /api/posts/:id` — update a post (requires `x-admin-key`)
 - `DELETE /api/posts/:id` — delete a post (requires `x-admin-key`)
+
+## Images in notes
+
+Open **Insert image** in the studio, enter an HTTP(S) image URL or a root-relative site path, add a description, and choose **Insert into story**. **Use t² logo** fills in the bundled dating-app logo. Preview and save the note as usual.
+
+Images use a standalone Markdown line:
+
+```markdown
+![t² dating-app logo](/images/t2-logo.png)
+```
+
+The same renderer displays images in the studio preview and published posts. Images fit narrow screens and include alternative text. The editor inserts links to images; it does not upload local files. The t² logo is included in `public/images/t2-logo.png` and is deployed with the site.

@@ -1,4 +1,4 @@
-const { escapeHtml, renderMarkdown, formatDate } = window.blogUtils;
+const { escapeHtml, renderMarkdown, formatDate, imageSource } = window.blogUtils;
 const loginScreen = document.querySelector('#login-screen');
 const studioShell = document.querySelector('#studio-shell');
 const form = document.querySelector('#post-form');
@@ -126,6 +126,39 @@ field('toggle-preview').addEventListener('click', () => {
   updatePreview();
 });
 form.addEventListener('input', () => { field('save-state').textContent = 'Unsaved changes'; updatePreview(); });
+
+field('use-logo').addEventListener('click', () => {
+  field('image-url').value = '/images/t2-logo.png';
+  field('image-alt').value = 't² logo: a purple camera with a heart-shaped lens, a wink, and a pink tongue';
+  field('image-error').textContent = '';
+});
+
+field('insert-image').addEventListener('click', () => {
+  const source = imageSource(field('image-url').value);
+  if (!source) {
+    field('image-error').textContent = 'Enter an http(s) image URL or a site path starting with a single /.';
+    field('image-url').focus();
+    return;
+  }
+  const alt = field('image-alt').value.trim().replace(/[\[\]\r\n]/g, ' ');
+  if (!alt) {
+    field('image-error').textContent = 'Add a short image description.';
+    field('image-alt').focus();
+    return;
+  }
+  const body = field('body');
+  const start = body.selectionStart;
+  const before = body.value.slice(0, start);
+  const after = body.value.slice(start);
+  const markdown = `${before && !before.endsWith('\n\n') ? '\n\n' : ''}![${alt}](${source})\n\n`;
+  body.value = before + markdown + after;
+  body.focus();
+  body.setSelectionRange(start + markdown.length, start + markdown.length);
+  body.dispatchEvent(new Event('input', { bubbles: true }));
+  field('image-error').textContent = '';
+  field('image-tools').open = false;
+  toast('Image inserted. Preview it, then save your note.');
+});
 
 field('save-post').addEventListener('click', async () => {
   if (!form.reportValidity()) return;

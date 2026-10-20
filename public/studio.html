@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/studio.css?v=4">
+  <link rel="stylesheet" href="/studio.css?v=5">
 </head>
 <body>
   <section class="login-screen" id="login-screen">
@@ -50,6 +50,18 @@
           <input class="title-input" id="title" maxlength="120" placeholder="Give this note a title…" required>
           <textarea class="excerpt-input" id="excerpt" maxlength="220" rows="2" placeholder="A short introduction for the homepage…"></textarea>
           <div class="body-label"><span>Story</span><span>Markdown supported</span></div>
+          <details class="image-tools" id="image-tools">
+            <summary>Insert image</summary>
+            <div class="image-fields">
+              <label for="image-url">Image URL or site path</label>
+              <input id="image-url" type="text" placeholder="https://example.com/photo.png" aria-describedby="image-help">
+              <label for="image-alt">Image description</label>
+              <input id="image-alt" type="text" maxlength="200" placeholder="Describe the image for readers">
+              <p id="image-help">Use an image link or a path such as /images/t2-logo.png. The image appears in the preview and published note.</p>
+              <div class="image-actions"><button id="use-logo" type="button">Use t² logo</button><button id="insert-image" type="button">Insert into story</button></div>
+              <p id="image-error" class="form-error" role="alert"></p>
+            </div>
+          </details>
           <textarea class="body-input" id="body" placeholder="Start writing here…&#10;&#10;Use ## for headings, > for quotes, and - for lists." required></textarea>
           <div class="publishing-options">
             <label><input id="is-draft" type="checkbox"><span class="check"></span><span><b>Keep as draft</b><small>Save it in the studio without making it public.</small></span></label>
@@ -62,7 +74,7 @@
   </div>
 
   <div class="toast" id="toast" role="status"></div>
-  <script src="/shared.js?v=3"></script>
-  <script src="/studio.js?v=3"></script>
+  <script src="/shared.js?v=4"></script>
+  <script src="/studio.js?v=4"></script>
 </body>
 </html>
